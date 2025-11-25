@@ -52,7 +52,6 @@ public class BlobStorageService {
     }
 
     public String generateReadSasUrl(String clientAgreementId, String blobName) {
-        // Prepend the prefix if blobName is relative
         String fullPath = clientAgreementId + "/" + blobName;
         BlobClient blobClient = blobServiceClient
                 .getBlobContainerClient(sasConfig.getContainer())
@@ -100,9 +99,7 @@ public class BlobStorageService {
         }
 
         List<ListedBlob> result = new ArrayList<>();
-        // Use prefix to list only blobs under the clientAgreementId
         String prefix = clientAgreementId + "/";
-        // Use ListBlobsOptions with prefix filtering
         ListBlobsOptions options = new ListBlobsOptions()
                 .setPrefix(prefix);
 
