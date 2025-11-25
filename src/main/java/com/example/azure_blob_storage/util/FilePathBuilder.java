@@ -7,7 +7,7 @@ public class FilePathBuilder {
         String folder = resolveFolder(contentType);
         String sanitized = sanitizeFilename(originalFilename);
 
-        return "files/" + folder + "/" + sanitized;
+        return folder + "/" + sanitized;
     }
 
     private static String resolveFolder(String contentType) {
