@@ -1,0 +1,47 @@
+obdb:
+  liquibase:
+    contexts: ${obdb.liquibase.dev.contexts:test,d04,dev,stub}
+spring:
+  application:
+    name: azure-blob-storage
+
+  datasource:
+    url: jdbc:sqlserver://DEV-FTS-DB-L01.REDMATH.ORG:1433;databasename=d01-obdb;encrypt=false
+    username: OB_OWNER
+    password: _rm123PK
+
+  liquibase:
+#    user: OB_OWNER
+#    password: _rm123PK
+    enabled: false
+#    change-log: classpath:db.changelog/db.changelog-master.yml
+
+
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServerDialect
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 250MB
+
+server:
+  port: 8080
+
+api:
+  endpoint:
+    base-url: /api/v1
+
+azure:
+  storage:
+    credential:
+      mode: connection-string  # Options: connection-string or managed-identity
+    default-container: obi-files
+  sas:
+    expiry:
+      minutes: 1
